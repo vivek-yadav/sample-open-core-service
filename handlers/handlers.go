@@ -1,6 +1,10 @@
 package handlers
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"log"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 type Handler struct {
 	Method       string
@@ -11,13 +15,15 @@ type Handler struct {
 var Handlers []Handler
 
 func init() {
-	Handlers = []Handler{
+	log.Println("In handlers")
+	handlers := []Handler{
 		{
 			Method:       "get",
 			Path:         "/",
 			HandlerFuncs: []fiber.Handler{HelloOpenCore},
 		},
 	}
+	Handlers = append(Handlers, handlers...)
 }
 
 func HelloOpenCore(c *fiber.Ctx) (err error) {
